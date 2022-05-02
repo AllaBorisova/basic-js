@@ -6,31 +6,38 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 const chainMaker = {
   chain: [],
+  // constructor() {
+  //   this.chain = [];
+  // },
+
   getLength() {
-    this.chain.length;
+    return this.chain.length;
 
   },
   addLink(value) {
     this.chain.push('( ' + value + ' )');
+    return this;
 
   },
   removeLink(position) {
-    // if (position.isInteger()) {
-    //   return this.chain.splice(position, 1);
-    // } else {
-    //   this.chain = [];
-    //   throw new Error("You can't remove incorrect link!");
-    // }
+    if (Number.isInteger(position) && position >= 1 && position <= this.chain.length) {
+      this.chain.splice(position - 1, 1);
+      return this;
+    } else {
+      this.chain = [];
+      throw new Error("You can't remove incorrect link!");
+    }
 
   },
   reverseChain() {
-    // return this.chain.reverse();
+    this.chain.reverse();
+    return this;
 
   },
   finishChain() {
-    // let result = this.chain.join('~~');
-    // this.chain = [];
-    // return result;
+    let result = this.chain.join('~~');
+    this.chain = [];
+    return result;
 
   }
 };
